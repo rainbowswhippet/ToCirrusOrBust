@@ -1,0 +1,18 @@
+This week's task is to complete "The basics" on Linux Journey website and learn 30+ basic commands.
+
+First lab completed:
+- Open and use the terminal
+- Use basic commands:
+    - whoami
+    - id
+    - id root
+    - echo
+    - ctrl+c
+- Install software (htop) using (sudo apt install)
+- Monitor systems performance using (htop)
+
+I was getting a feel for the (echo) command and ended up arguing with Labby (LabEx AI assistant). I input "Just getting started with Linux!" and the
+terminal returned (dquote>) and it wouldn't get out of that command, basically broken. After much to-ing and fro-ing with Labby, because it was 
+gaslighting me by saying "if you input exactly "Just getting started with Linux!" it works perfectly", well it wasn't - turns out the (!) broke the 
+string and the terminal treated the quote mark after the (!) as opening a new quote. Inputting another (") after (dquote>), the terminal closed the quote. 
+Or just use (ctrl+c) to get out of the command. Labby at the end said using single quotes for strings is best and the top users do this. Bastard.
