@@ -1,0 +1,19 @@
+P01M01D03.
+
+Navigating the file system with (cd) and (pwd)
+Creating files and directories with (touch) and (mkdir)
+Listing contents with (ls) and its options
+Copying files and directories with (cp)
+Moving and renaming with (mv)
+Removing files and directories with (rm) and (rmdir)
+
+Specific Commands:
+(man command)
+(whoami) and (id)
+(pwd), (echo ~), (ls), (ls ~), (cd), (cd ..), (cd ~), (cd /(directory)/(...)), (touch)
+(echo "Hello Linux" > file2.txt), (echo "Hidden file" > .hiddenfile), (mk dir), (mk dir (directory)), (ls -l), (ls -a), (ls -la), (ls -l (directory)), (ls (directory))
+(cp), (cp (file name) ((file name)_copy)), (cp (file name) (directory)/), (cp -r (directory name_copy))
+(mv), (mv (orignal file name) (new file name)), (mv (file name) ((directory moving to)/)), (mv (directory) (new directory name)), (mv (directory/filename) (./(new file name))
+(rm), (rm (filename)), (rm -i (filename)), (rm (directory)), (rm -r (directory)), (rm -f (filename)), (rm -rf (directory)), (rm -rf /), (ls (-R) (directory))
+
+I feel like I've been BASHED extensively today.
