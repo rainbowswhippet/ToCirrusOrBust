@@ -1,3 +1,5 @@
+P01M01D06
+
 # After yesterdays disaster trying to use LabEx, it seems Safari was blocking the pop ups which was affecting the number sessions I could use on LabEx, I WAS IN A MOOOOOD. It was good learning today."
 
 (~) is a shorcut for the home directory: 
@@ -50,3 +52,9 @@ File Contents & Comparing
       (diff) (-r) (~/(directory1)) (~/(directory2))
           (-r) option tells (diff) to recursively compare subdirectories as well as the directories themselves. Output would show (directory1) containing files not in (directory2)
     
+Extra
+(cd)
+    cd .    current directory
+    cd ..    parent directory (Moves one level up to the directory containing your current one)
+    cd ~    home directory (shortcut to personal home directory)
+    cd -    previous directory (Takes you back to the last directory you were in)
