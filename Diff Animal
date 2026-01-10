@@ -1,0 +1,52 @@
+# After yesterdays disaster trying to use LabEx, it seems Safari was blocking the pop ups which was affecting the number sessions I could use on LabEx, I WAS IN A MOOOOOD. It was good learning today."
+
+(~) is a shorcut for the home directory: 
+    (cd) ~/(directory)
+
+File Management
+(cp) for duplicting files and directories
+    It was important to use (-r) to (cp) all contents of a directory
+(mv) for both moving and renaming files and directories
+(rm) for removing files and directories
+    Could use (-r) to (rm) all contents of a directory
+
+File Contents & Comparing
+(cat) for small files
+    For quickly displaying content in the terminal for text files. Short for 'concatentate'.
+      (cat) (directoryname/filename)
+    Combine files into one
+      (cat) (file1) (file2) > combined_file
+        Create new files - quickly redirect text into a new file
+    Add (-n) for line numbering: (cat) (-n) (directoryname/filename)
+    Create file quickly with redirection (>): (cat) > (filename.txt)
+    View invisible characters (-A): cat (-A) /tmp/hello
+    EOF, the "Here Document" - to create multi-line files automatically in the terminal
+      (cat) << EOF > summary.txt.
+      This is line 1.
+      This is line 2.
+      EOF
+        Take everything typed until EOF.
+    Using (-) as an arguement - (cat) will read from the keyboard and mix it with a file, by repeating back what's written. Press (ctrl+d) to stop.
+      (cat) /tmp/hello (-)
+    Use (>>) to append content to the end of an existing file without deleting what's already there
+      (cat) /tmp/hello >> my_new_file.txt
+    UUOC (Useless Use Of Cat), this is inefficient beginner syntax as (grep) can read files directly:
+      (cat) (filename) | (grep) "search term"
+        Do this instead: (grep) "search term" (filename)
+
+(less) for viewing large files
+
+(head) to view the beginning or "head" of a file
+    By default (head) shows the first 10 lines of a file, optionally, the (-n(number)) shows that name number of lines you want to see
+        (head) -n1 /tmp/hello
+    Using (-c1) displays a specific number of bytes or characters you want to see, the number can change to see that namy bytes
+
+(tail) to view the end of a file, it follows the same principle as the default, to see the number of lines (-n(number), and (-c(number) of bytes. Inputting (-c1) might show an new line character which is invisible.
+
+(diff) 
+    to compare two files and see difference between them. The output decribes what changes are needed to make the first file identical to the second file. Only compare their contents at the time the command is run.
+      (diff) (file1) (file2)
+  To compare directories.
+      (diff) (-r) (~/(directory1)) (~/(directory2))
+          (-r) option tells (diff) to recursively compare subdirectories as well as the directories themselves. Output would show (directory1) containing files not in (directory2)
+    
