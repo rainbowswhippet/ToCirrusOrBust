@@ -1,0 +1,24 @@
+P01M02D07: File Contents & Comparing Challenge - The Manuscript Mystery
+
+Use (cat, head, tail) to view contents of the file
+
+Tasks
+  Use cat to view the contents of /home/labex/project/manuscript_v1.txt.
+  Use head to view the first two lines of /home/labex/project/manuscript_v2.txt.
+  Use tail to view the last line of both files.
+Requirements
+  Use only the commands learned in the File Contents and Comparing lab (cat, head, tail).
+  Do not modify the contents of the files.
+
+* I found out you can view two files at the same time - snap!!
+  (cat) (-n1) (file1) (file2)
+    File 1 name will display first with it's name with the content displayed on the next line.
+    File 2 as above, but with an empty line before it for separation.
+
+Comparing the Files
+
+Tasks
+  Use the diff command to compare /home/labex/project/manuscript_v1.txt and /home/labex/project/manuscript_v2.txt.
+Requirements
+  Use the diff command as demonstrated in the File Contents and Comparing lab.
+  Analyze the output to understand the differences between the two files.
