@@ -1,0 +1,123 @@
+P01M01D07 - Permissions
+
+Understanding (ls) (-l)
+  -rw-rw-r-- 1 labex labex 0 Jan 12 01:48 example.txt
+    -rw-rw-r--: These are the permissions.
+      The first - means it's a regular file.
+      rw- (User/owner): You can read (r) and write (w), not execute (-) or it would be (x).
+      rw- (Group): People in your group can read (r) and write (w), not execute (-).
+      r-- (Others): Everyone else can only read it.
+      labex labex: This shows the Owner and the Group.
+      0: This is the file size in bytes. Since you used touch, the file is empty!
+  *If there was a (d) rather than (-) at the start, it would mean directory, (l) is symbolic link.
+
+Changing Ownership of a file (chown)
+  (sudo) (chown) (root:root) (example.txt)
+    Here's what this command does:
+      (sudo) runs the command with root privileges. You'll likely be prompted for your password. (chown) requires elevated privileges because it's a powerful command that can affect system security. Without (sudo), you'll get a "Permission denied" error.
+      (chown) is the command to change ownership.
+      (root:root) specifies the new owner and group (both set to root). The syntax is owner:group.
+      (example.txt) is the target file.
+
+  The chown command is flexible. You used root:root, but you can use it in different ways:
+      sudo chown root example.txt -> Changes only the owner to root.
+      sudo chown :root example.txt -> Changes only the group to root (similar to the chgrp command).
+      sudo chown root:labex example.txt -> Changes owner to root and group to labex.
+
+  If you ever have a whole folder full of files and want to change the owner of everything inside at once, you can use the -R (recursive) flag:
+      sudo chown -R root:root ~/project/my_folder
+
+Changing the ownership of a Directory
+      mkdir -p new-dir/subdir
+      echo "Hello, world" > new-dir/file1.txt
+      echo "Another file" > new-dir/subdir/file2.txt
+
+  Let's break down these commands:
+      mkdir -p new-dir/subdir creates the new-dir directory and its subdir subdirectory. The -p option tells mkdir to create parent directories as needed. Without -p, if new-dir didn't exist, creating new-dir/subdir would fail.
+      echo "Hello, world" > new-dir/file1.txt creates a file named file1.txt inside the new-dir directory and writes the text "Hello, world" into it. The > symbol is used for redirection; it takes the output of the echo command and redirects it into the specified file.
+      echo "Another file" > new-dir/subdir/file2.txt similarly creates a file named file2.txt inside the new-dir/subdir directory and writes the text "Another file" into it.
+
+    Check ownership: ls -lR new-dir
+  ls -lR lists the contents of new-dir recursively. The -R option (recursive) makes ls list all files and subdirectories within new-dir and their contents.
+  shows that the directory new-dir, its subdirectory subdir, and the files file1.txt and file2.txt are all owned by labex.
+  change the ownership of new-dir and all its contents to the root user: sudo chown -R root:root new-dir
+    In this command:
+      The -R option tells chown to operate recursively, changing the ownership of all files and subdirectories within new-dir. This is crucial; without -R, only the new-dir directory's ownership would change, but the files and subdirectories within it would still be owned by labex.
+
+Changing Permissions of a File - (chmod):  sudo chmod 700 example.txt
+   In this command:
+700 is a numeric representation of permissions:
+The first digit (7) represents the owner's permissions.
+The second digit (0) represents the group's permissions.
+The third digit (0) represents the others' permissions.
+Each digit is a number from 0 to 7, calculated by adding the values for read (4), write (2), and execute (1) permissions:
+4: Read permission
+2: Write permission
+1: Execute permission
+0: No permission
+So, 7 (first digit) gives the owner read (4), write (2), and execute (1) permissions: 4+2+1=7
+0 (second digit) gives the group no permissions (0+0+0=0).
+0 (third digit) gives others no permissions (0+0+0=0).
+Therefore, 700 means: Owner: read, write, execute. Group: none. Others: none.
+      
+Changing Permissions of a Directory
+  Changing permissions for directories works similarly to changing permissions for files.
+    mkdir ~/test-dir
+    chmod 700 ~/test-dir
+check the current permissions
+    ls -ld ~/test-dir
+      The -d option in ls -l tells ls to list the directory itself, rather than its contents. Without -d, ls would list the files and subdirectories inside test-dir, which is empty right now.
+    chmod -R 755 ~/test-dir
+        -R applies the change recursively to all files and subdirectories (though our directory is empty in this case). It's good practice to include it when dealing with directories, even if they're currently empty, in case you add files later.
+755 gives read, write, and execute permissions to the owner, and read and execute permissions to group and others.
+
+Using Symbolic Notation for PErmissions
+  While numeric notation is concise, symbolic notation can be more intuitive, especially when you only want to change a single permission. Symbolic notation uses letters to represent the user, group, and others, and operators to add or remove permissions.
+First, let's create a new script file with some content:
+cd ~/project
+echo '#!/bin/bash\necho "Hello, World"' > script.sh
+This command does two things:
+It creates a new file named script.sh. The .sh extension is commonly used for shell scripts. shell scripts are executable files that contain a series of commands that are executed in sequence.
+It writes two lines into this file:
+#!/bin/bash (called a shebang) tells the system this is a bash script. The shebang line specifies the interpreter that should be used to execute the script. In this case, it's /bin/bash, which is the path to the Bash interpreter.
+echo "Hello, World" is a command that will print "Hello, World" when the script runs. The echo command simply displays the text that follows it.
+\n is a newline character, ensuring the commands are on separate lines in the file.
+Now, let's check its initial permissions:
+ls -l script.sh
+You should see something like:
+-rw-rw-r-- 1 labex labex 32 Jul 29 16:30 script.sh
+As you can see, initially, the script only has read and write permissions for the owner and group, and read permission for others. It doesn't have execute permission, which is required to run it as a program.
+Let's try to run the script:
+./script.sh
+You should see a "Permission denied" error because the script doesn't have execute permissions yet. The ./ part tells the shell to execute the script located in the current directory.
+Now, let's add execute permission for the owner using symbolic notation:
+chmod u+x script.sh
+In this command:
+u refers to the user (owner). Other options are g for group, o for others, and a for all (user, group, and others).
++x adds execute permission. The + symbol adds a permission, while the - symbol removes a permission.
+So, u+x means "add execute permission for the owner."
+Let's verify the change:
+ls -l script.sh
+You should now see:
+-rwxrw-r-- 1 labex labex 32 Jul 29 16:30 script.sh
+The owner now has rwx (read, write, and execute) permissions.
+Now, let's try running the script again:
+./script.sh
+This time, you should see the output: "Hello, World"
+This example clearly demonstrates why we need to add execute permissions to scripts, and the difference before and after adding these permissions. Symbolic notation makes it easy to modify specific permissions without having to recalculate the entire numeric representation.
+
+In this lab, we've explored essential Linux commands for managing file permissions:
+We used touch to create new files and update existing ones.
+We learned how to use chown to change file and directory ownership, including recursive changes for entire directory structures.
+We practiced using chmod with both numeric and symbolic notation to modify file and directory permissions, understanding the different permission levels for owner, group, and others.
+We saw practical examples of why permissions matter, such as needing execute permissions to run scripts.
+We clarified the differences between numeric and symbolic notation for chmod and when each might be more appropriate.
+These commands are crucial for maintaining security and controlling access in Linux systems. Remember to always be cautious when changing permissions, especially when using sudo, as incorrect changes can have significant consequences for system security and functionality. Always double-check your commands before executing them, and understand the implications of the changes you're making.
+
+Permissions Lab Challenge
+  You've successfully demonstrated your ability to:
+    Create files using touch
+    Change file ownership with chown
+    Modify file permissions using chmod
+    View file details with ls
+These commands are fundamental to Linux file management and are used frequently in system administration tasks. Keep practicing and exploring to further solidify your skills in Linux file permissions and ownership management.
