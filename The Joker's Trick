@@ -1,0 +1,225 @@
+P01M01W02D02
+
+#User Management Challenge
+
+Introduction
+In this challenge, you will apply your knowledge of Linux user account management. You'll create new user accounts, modify existing ones, and delete users. This challenge will test your understanding of the concepts learned in the "User Account Management" lab.
+Achievements
+You'll demonstrate your ability to use:
+useradd - to create new users
+passwd - to change user passwords
+usermod - to modify user accounts
+userdel - to delete user accounts
+This is a Challenge, which differs from a Guided Lab in that you need to try to complete the challenge task independently, rather than following the steps of a lab to learn. Challenges are usually a bit difficult. If you find it difficult, you can discuss with Labby or check the solution. Historical data shows that this is a beginner level challenge with a 94% pass rate. It has received a 99% positive review rate from learners.
+
+Labby
+Great! Let me prepare the lab VM for you. While it's being set up, you can start reviewing the first step of this lab.
+
+Labby
+Creating User Accounts
+In this step, you'll create several user accounts with different specifications.
+Tasks
+Complete the following tasks in order:
+Create a user named joker.
+Create a user named batman with a home directory at /home/gotham.
+Requirements
+Use the useradd command for all user creations.
+batman has a different home directory than the default.
+Example
+After completing these tasks, you can verify the user information like this:
+sudo grep 'joker\|batman' /etc/passwd
+Sample output:
+joker:x:5001:5001::/home/joker:/bin/sh
+batman:x:5002:5002::/home/gotham:/bin/sh
+Continue
+
+Labby
+Inspect Result
+Verify if joker user exists
+Verify if batman user exists with correct home directory
+Continue
+
+Labby
+Managing User Passwords
+In this step, you'll set and change passwords for users.
+Tasks
+Complete the following tasks:
+Set a password for the joker user.
+Change the password for the batman user.
+Requirements
+Use the passwd command for all password operations.
+For this challenge, use simple passwords like password123.
+Example
+After setting the passwords, you can check the password status:
+sudo passwd -S joker
+sudo passwd -S batman
+ Explain Code
+Sample output:
+joker P 01/19/2024 0 99999 7 -1
+batman P 01/19/2024 0 99999 7 -1
+ Explain Code
+/explain
+```bash
+sudo passwd -S joker
+sudo passwd -S batman
+```
+
+Labby
+Hello! I see you've already checked the status of the users with sudo passwd -S.
+Based on your output, both joker and batman have a "P" status, which correctly indicates that they both have usable passwords.
+If the verification is not passing, or if you haven't actually performed the requested tasks yet, here is a hint:
+To set or change a password: You should use the passwd command followed by the username.
+Example logic: sudo passwd <username>
+Interaction: After running the command, the terminal will prompt you to enter the new password twice. For this challenge, you can use something simple like password123.
+You can click the "Check" button to see the validation results. If you need a more detailed explanation or the full solution, consider upgrading to LabEx Pro!
+Keep up the great work!
+Continue
+
+Labby
+Managing User Passwords
+In this step, you'll set and change passwords for users.
+Tasks
+Complete the following tasks:
+Set a password for the joker user.
+Change the password for the batman user.
+Requirements
+Use the passwd command for all password operations.
+For this challenge, use simple passwords like password123.
+Example
+After setting the passwords, you can check the password status:
+sudo passwd -S joker
+sudo passwd -S batman
+ Explain Code
+Sample output:
+joker P 01/19/2024 0 99999 7 -1
+batman P 01/19/2024 0 99999 7 -1
+ Explain Code
+/explain
+```plaintext
+joker P 01/19/2024 0 99999 7 -1
+batman P 01/19/2024 0 99999 7 -1
+```
+
+Labby
+It looks like you've successfully verified the password status for both users!
+The P in your output confirms that both joker and batman have active passwords set.
+If you have already followed the instructions to:
+Set the password for joker.
+Change the password for batman.
+Then you are all set! You can now click the "Check" button in the challenge interface to verify your progress and move on to the next step.
+If the check fails, make sure you used sudo when setting the passwords to ensure the changes were saved correctly.
+Keep it up! 🚀
+Continue
+
+Labby
+Managing User Passwords
+In this step, you'll set and change passwords for users.
+Tasks
+Complete the following tasks:
+Set a password for the joker user.
+Change the password for the batman user.
+Requirements
+Use the passwd command for all password operations.
+For this challenge, use simple passwords like password123.
+Example
+After setting the passwords, you can check the password status:
+sudo passwd -S joker
+sudo passwd -S batman
+ Explain Code
+Sample output:
+joker P 01/19/2024 0 99999 7 -1
+batman P 01/19/2024 0 99999 7 -1
+ Explain Code
+Continue
+
+Labby
+Inspect Result
+Verify if joker user has a password
+Verify if batman user's password has been changed
+Continue
+
+Labby
+Modifying User Accounts
+In this step, you'll modify existing user accounts.
+Tasks
+Complete the following tasks:
+Change the joker user's home directory to /home/arkham.
+Change the batman user's shell to /bin/bash.
+Requirements
+Use the usermod command for all modifications.
+Example
+After making these changes, you can verify them:
+sudo grep 'joker\|batman' /etc/passwd
+Sample output:
+joker:x:5001:5001::/home/arkham:/bin/sh
+batman:x:5002:5002::/home/gotham:/bin/bash
+Continue
+
+Labby
+Inspect Result
+Verify if joker user's home directory is changed
+Verify if batman user's shell is changed
+Continue
+
+Labby
+Deleting User Accounts
+In this final step, you'll delete user accounts.
+Tasks
+Complete the following tasks:
+Delete the joker user without removing their home directory.
+Delete the batman user and their home directory /home/gotham.
+Requirements
+Use the userdel command for all deletions.
+Example
+After deleting these users, you can verify:
+sudo grep 'joker\|batman' /etc/passwd
+ls /home/gotham
+These commands should return no results, indicating the users have been deleted.
+Continue
+
+Labby
+Inspect Result
+Verify if joker user is deleted
+Verify if batman user and home directory are deleted
+Continue
+
+Labby
+Summary
+Congratulations! You've completed the "Joker's Trick" user account management challenge. You've demonstrated your ability to:
+Create user accounts with various specifications
+Set and change user passwords
+Modify user account properties
+Delete user accounts with and without removing home directories
+These skills are fundamental for Linux system administration. Keep practicing and exploring to become a Linux user management expert!
+
+Labby
+Deleting User Accounts
+In this final step, you'll delete user accounts.
+Tasks
+Complete the following tasks:
+Delete the joker user without removing their home directory.
+Delete the batman user and their home directory /home/gotham.
+Requirements
+Use the userdel command for all deletions.
+Example
+After deleting these users, you can verify:
+sudo grep 'joker\|batman' /etc/passwd
+ls /home/gotham
+These commands should return no results, indicating the users have been deleted.
+Continue
+
+Labby
+Inspect Result
+Verify if joker user is deleted
+Verify if batman user and home directory are deleted
+Continue
+
+Labby
+Summary
+Congratulations! You've completed the "Joker's Trick" user account management challenge. You've demonstrated your ability to:
+Create user accounts with various specifications
+Set and change user passwords
+Modify user account properties
+Delete user accounts with and without removing home directories
+These skills are fundamental for Linux system administration. Keep practicing and exploring to become a Linux user management expert!
+Continue
