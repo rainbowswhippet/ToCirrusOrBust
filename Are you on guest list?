@@ -1,0 +1,125 @@
+P01M01W02D02
+
+#User Account Management
+
+Creating a new user - 
+  (sudo) (useradd) (joker)
+      (sudo) is a command that gives you temporary superuser (administrator) privileges. We use it because creating a new user requires these higher-level permissions.
+      (useradd) is the command to create a new user.
+      (joker) is the username we're creating.
+
+  To verify that the user was created - (sudo) (grep) (-w) ('joker') (/etc/passwd)
+      (/etc/passwd file) is like a phonebook for user accounts. Each line represents one user account, with different pieces of information separated by colons (:)
+          joker:x:5001:5001::/home/joker:/bin/sh
+              Username: joker
+              Password: x (the actual password is stored securely elsewhere)
+              User ID: 5001
+              Group ID: 5001
+              Home Directory: /home/joker, but it hasn't been created yet
+              Default Shell: /bin/sh
+
+Creating a user with a home directory
+  sudo useradd -m bob
+      The -m option tells the system to create a home directory for the user. A home directory is like a personal folder where a user can store their files and settings.
+
+  sudo ls -ld /home/bob
+      to verify that the home directory was created
+
+  output eg - drwxr-x--- 2 bob bob 57 Jan 19 13:33 /home/bob
+      d at the start means it's a directory
+      rwxr-x--- shows who can read, write, or execute in this directory
+      The two bob entries show that both the user and group owner of this directory is bob
+      57 is the size of the directory in bytes
+      Jan 19 13:33 is when the directory was created
+      /home/bob is the location of the directory
+
+  sudo useradd -d /home/(directory name) username
+      to create a user with a home directory in one go
+
+
+Setting a user password
+    sudo passwd joker
+        If successful, you'll see a message saying "passwd: password updated successfully".
+        Behind the scenes, Linux stores encrypted passwords in a secure file called /etc/shadow. This is more secure than storing them in the /etc/passwd file where anyone could see them.
+
+    sudo passwd -S <username>
+        to check password status - "P" status, correctly indicates that they both have usable passwords.
+        
+
+Modifying User Properties
+  sudo usermod -d /home/wayne joker
+      usermod is the command to modify user account settings
+      -d /home/wayne specifies the new home directory
+      joker is the user we're modifying
+
+  sudo grep -w 'joker' /etc/passwd
+      to verify the change.
+      -w is used to match the whole word, and grep is used to search for the word in the file. You should see that joker's home directory has been updated in the output.
+          e.g. joker:x:5001:5001::/home/wayne:/bin/sh
+
+  Key Points to Remember:
+      Registry Change: This command updates the user's information in the /etc/passwd file (the system's "address book" for users).
+      Files stay put: By default, using -d only changes the path setting. It does not automatically move the actual files or folders from the old directory to the new one.
+      Tip: If you want to move the files as well, you would add the -m flag (e.g., usermod -d /new/path -m username).
+
+Changing User Shell
+    Changing joker's shell to bash provides several benefits:
+        More intuitive command-line interface
+        Enhanced scripting capabilities
+        Better customization options for the user's environment
+
+    sudo usermod -s /bin/bash joker
+        To change default shell to bash
+    sudo grep -w 'joker' /etc/passwd
+        to verify the change
+            You should see /bin/bash at the end of joker's entry. This means bash is now joker's default shell.
+
+Adding a User to A group
+    to add to the sudo group
+        sudo usermod -aG sudo joker
+            usermod is the command to modify user accounts
+            -aG means "append to Group" (add to a group without removing from other groups)
+            sudo is the group we're adding the user to
+            joker is the user we're modifying
+  
+    to verify the change
+          groups joker
+            You should see sudo listed among joker's groups.
+
+    to see effects of change, switch to the joker user and try a command that requires sudo privileges
+          su - joker
+
+    Once logged in as joker, let's try to view a file that normally requires root privileges
+          sudo cat /etc/shadow
+
+Locking and Unlocking User Accounts
+    Sometimes, you might need to temporarily disable a user account without deleting it.
+Lock the joker account:
+sudo passwd -l joker
+ Explain Code
+The -l option locks the password.
+Try to switch to the joker user:
+su - joker
+ Explain Code
+You'll be asked for a password. Enter the password you set for joker earlier ("password123" if you followed our suggestion).
+You should see an "authentication failure" message. This means the account is successfully locked.
+Now, let's unlock the account:
+sudo passwd -u joker
+ Explain Code
+The -u option unlocks the password.
+Try switching to the joker user again:
+su - joker
+ Explain Code
+Enter the password when prompted. This time, you should be able to switch to the joker user successfully.
+Type exit to return to your original user account before continuing to the next step.
+
+Deleting a User
+Finally, let's learn how to delete a user. We'll delete the "bob" user we created earlier.
+Delete bob and their home directory:
+sudo userdel -r bob
+The userdel command deletes user accounts. The -r option removes the user's home directory and mail spool.
+Verify that the user has been deleted:
+    sudo grep -w 'bob' /etc/passwd
+sudo ls -ld /home/bob
+    Both commands should return no results. This means the user and their home directory have been successfully remove
+      
