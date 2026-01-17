@@ -1,0 +1,26 @@
+P01M01W02D06 - Lab 01
+
+Tasks
+    Create a file named system_report.txt in your current directory (~/project).
+    The file must contain the output of the whoami, uname -a (all system information), and uptime commands.
+
+Requirements
+    The final report file must be named system_report.txt.
+    You must use output redirection operators (> and >>) to write the command outputs into the file.
+    The file must be created in the ~/project directory.
+
+My input
+    whoami > system_report.txt
+        uname -a >> system_report.txt
+            uptime >> system_report.txt
+                cat system_report.txt        
+:)
+
+Summary
+    In this challenge, you practiced using several essential commands that every system administrator must master:
+      whoami: To confirm your user identity on the Project Phoenix server.
+      uname: To check operating system information and ensure compatibility.
+      who: To see who else is working on the development server.
+      id: To inspect your user and group memberships for proper access control.
+      top: To monitor system processes and resource usage to ensure optimal performance.
+      Output Redirection (> and >>): To document your findings in professional reports.
