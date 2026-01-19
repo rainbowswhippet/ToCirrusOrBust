@@ -1,0 +1,37 @@
+P01M01W03D01
+
+#The Digital Architect Challenge
+
+Welcome to Day 2 at LabEx Corporation! After yesterday's successful system reconnaissance, you've been promoted to the role of Digital Architect for Project Phoenix. The development team was impressed with your thorough documentation and attention to detail.
+However, there's an urgent problem that needs your immediate attention. The previous system administrator left abruptly, and Project Phoenix's files are in complete disarray. Source code, documentation, and configuration files are scattered across a single directory. Critical settings are vulnerable without backups, and outdated log files are cluttering the development server you surveyed yesterday.
+Your mission is to architect a clean, logical, and efficient file structure that will support the growing development team. By creating proper directories, organizing files, securing backups, and cleaning up old data, you'll establish the foundation that Project Phoenix needs to succeed.
+The lead developer, Sarah Chen, is counting on you to transform this chaos into an organized, professional development environment. Your work today will directly impact the team's productivity and the project's timeline. Let's get started!
+
+1. Setting Up the Project Directory Structure - Create three new subdirectories: src for source code, config for configuration files, and docs for documentation, using a single command
+    pwd
+    cd ~/[directory]/[target directory]
+    mkdir [directory1] [directory2] [directory3]
+
+2. Navigating and Creating Project Files - Create a backup copy of the config.json file
+    mv -t [directory1] main_app.py
+    mv -t [directory2] config.json
+    mv -t [directory3] README.md
+    ls -F
+
+3. Backing Up Critical Configuration Files - Move the entire shared_docs directory and all of its contents into the ~/project/phoenix_project/docs/ directory
+    cd [directory2]
+    cp config.json config.json.bak
+    ls -F
+
+4. Reorganizing the Team’s Shared Resources
+    cd ~/project/shared_docs
+    mv shared_docs ~/project/phoenix_project/docs/ (mv [SOURCE_DIRECTORY] [DESTINATION_DIRECTORY])
+    ls -l ~/project/phoenix_project/docs/
+
+5. Archiving and Removing Outdated Log Files - Create a compressed tar archive named old_logs.tar.gz that contains all log files from the year 2023. After the archive is successfully created, delete the original 2023 log files that you just archived
+    cd ~/project/logs
+    tar -czf old_logs.tar.gz *_2023-*.log
+    ls -l
+    rm -i *_2023-*.log
+
+Crisis averted.
