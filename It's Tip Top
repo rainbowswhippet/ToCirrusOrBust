@@ -1,0 +1,30 @@
+P01M01W03D01
+
+#Top
+
+1. Basic usage of the top command to display system processes and resource usage.
+    'q' to quit
+    'h' or '?' while top is running to see a help screen with all available commands
+2. How to sort processes by different criteria (CPU usage, memory usage, PID) within top.
+    'M' key (uppercase), this will sort the processes by memory usage (resident set size) instead of CPU usage.
+    'P' key (uppercase), to sort by CPU usage again
+    'N' key (uppercase), to sort by process ID (PID)
+    'R' (uppercase), to reverse the current sort order
+3. Changing the update interval of top for more or less frequent updates.
+    top -d 1
+        where 1 is the update delay
+        very short update intervals can themselves consume significant CPU resources, so use them judiciously
+4 Monitoring processes for a specific user
+    top -u labex
+        where labex is the username
+5. Displaying only active processes, filtering out idle ones
+    top -i
+        filters out any process that has zero CPU usage since the last update
+
+Additional top command options and interactive commands:
+-b: Run in batch mode (useful for sending output to other programs or files)
+-n: Number of iterations before top will terminate
+'k': Kill a process (by PID) from within top
+'r': Renice (change priority of) a process
+'c': Toggle display of command name/line
+'V': Display version information
