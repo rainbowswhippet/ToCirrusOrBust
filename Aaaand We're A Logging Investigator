@@ -1,0 +1,85 @@
+P01M01W05D02
+  It should be Week 1 of Month 2 but life got in the way and I've lost 2 weeks!! So I'm redoing Week 3 then continuing on.
+
+The Log Investigator (Lab)
+  It's Day 3 at LabEx Corporation, and disaster has struck Project Phoenix! You arrive at the office to find Sarah Chen and the development team in crisis mode. The application you helped organize yesterday has encountered critical errors during its first major testing phase.
+  Emergency alerts are flooding the monitoring systems, users are reporting application failures, and the deployment pipeline has ground to a halt. Sarah turns to you with a look of desperation - the senior DevOps engineer is out sick, and the project deadline is fast approaching.
+  "We need our best investigator on this," Sarah says, handing you the incident report. "Your systematic approach to organizing our files was exactly what we needed. Now we need that same methodical thinking to solve this mystery."
+  Your mission is to dive deep into the Project Phoenix server, analyze logs and configuration files, and uncover the root cause of these failures. You'll use advanced Linux command-line tools to piece together the clues and restore stability to the application your team has worked so hard to build. The future of Project Phoenix—and possibly your career at TechNova—depends on your detective skills!
+
+  Reviewing Application Log File Contents
+  Your first step as an investigator is to check Project Phoenix's application log file. The application writes its logs to ~/project/logs/app.log. A flood of messages can be overwhelming, so you need to find the critical error messages quickly to understand what's going wrong with the system you helped organize yesterday.
+  Tasks
+      Filter the ~/project/logs/app.log file to find all lines containing the word ERROR.
+      Save the filtered lines to a new file named ~/project/error_report.txt.
+  Requirements
+      You must use a command-line tool to search the file.
+      The input file for your search is ~/project/logs/app.log.
+      The output must be saved in a file named ~/project/error_report.txt in the ~/project directory.
+      The output file should only contain the lines with the word ERROR.
+  * My input *
+      grep "ERROR" ~/project/logs/app.log      
+      grep "ERROR" ~/project/logs/app.log > ~/project/error_report.txt        >>> I could have done this in one step but I wanted to see the errors before > into a file <<<
+      cat ~/project/error_report.txt
+
+  Investigating System Boot Messages
+  The application errors might be a symptom of a deeper hardware or kernel-level issue. A good place to look for such problems is the kernel ring buffer, which contains messages from the system's boot process and driver operations.
+      Tasks
+            Examine the system's kernel messages for any lines related to fail or error.
+            Save these findings into a file named ~/project/boot_issues.txt.
+      Requirements
+            You must use the dmesg command to view kernel messages.
+            Your search for fail or error should be case-insensitive.
+            The results must be saved to a file named ~/project/boot_issues.txt.
+            Note: You may need administrative privileges (sudo) to access kernel messages.
+      * My Input *
+            sudo dmesg | grep -iE 'fail|error'
+            sudo dmesg | grep -IE 'fail|error' > ~/project/boot_issues.txt
+            cat ~/project/boot_issues.txt
+            
+
+  Examining the Web Server Configuration File
+  No critical hardware issues found. The problem might be in the web server configuration. Let's examine the Nginx configuration file to see how it's set up. Sometimes, misconfigurations like having too few worker processes can cause performance bottlenecks and lead to application failures under load.
+      Tasks
+            Search the web server configuration file at ~/project/config/nginx.conf.
+            Find the line containing the worker_processes directive.
+            Append this line to the ~/project/error_report.txt file you created in the first step.
+      Requirements
+            The input file is ~/project/config/nginx.conf.
+            You must append the result to ~/project/error_report.txt, not overwrite it.
+      * My Input *
+            grep "worker_processes" ~/project/config/nginx.conf
+            grep "worker_processes" ~/project/config/nginx.conf >> ~/project/error_report.txt
+
+  Comparing Staging and Production Configuration Files
+  A common source of production issues is a discrepancy between the staging and production environments. A feature might work perfectly in staging but fail in production due to a small configuration difference. Let's compare the application's configuration files from both environments to spot any differences.
+      Tasks
+            Compare the staging configuration file ~/project/config/staging/app.conf with the production configuration file ~/project/config/production/app.conf.
+            Save the differences to a new file named ~/project/config_diff.txt.
+      Requirements
+            You must use the diff command.
+            The output showing the differences must be saved to ~/project/config_diff.txt.
+      * My Input *
+            diff ~/project/config/staging/app.conf ~/project/config/production/app.conf > ~/project/config_diff.txt
+            cat ~/project/config_diff.txt
+
+
+  Verifying Directory Consistency Between Servers
+  The configuration difference is a strong lead! It seems the production server might also be missing some critical files that exist on the staging server. This could be due to a failed deployment. Let's simulate this by comparing two directories that represent the file structures from two different servers.
+      Tasks
+            You have two directories: /home/labex/project/server1_files (representing the staging server) and /home/labex/project/server2_files (representing the production server).
+            Compare these two directories to find out which files are unique to server1_files.
+            Save the complete comparison output to a file named /home/labex/project/missing_files.txt.
+      Requirements
+            You must use the diff command to compare the two directories.
+            The output must be saved to /home/labex/project/missing_files.txt
+    * My Input *
+            diff -r home/project/labex/project/server1_files home/project/labex/project/server2_files > home/project/missing_files.txt
+
+    Summary
+    Exceptional detective work! You have successfully identified the root causes of Project Phoenix's critical failures and provided Sarah Chen and the development team with actionable intelligence to resolve the issues.
+    Through your systematic investigation, you've mastered essential troubleshooting commands:
+            grep: To filter log files and extract critical error information.
+            dmesg: To investigate system-level hardware and kernel issues.
+            diff: To compare configuration files and identify discrepancies between environments.
+            Command pipelines and redirection: To efficiently process and document your findings.
