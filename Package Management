@@ -1,0 +1,84 @@
+Getting back on track again!!
+
+P01M01W03D03
+
+Package Management in Linux (Debian based) - follow along video from Linux For Hackers
+
+To install software with the two main package managers
+
+dpkg (low level)
+      - to install you have to go find and download the package file through a website
+      - command for installing software
+            - dpkg -i "packagefilename.deb"
+      - can have dependency errors and you'll have to find and install the additional packages for the install to work
+      - to list all installed packages
+            - dpkg -l
+      - to search for specific install package
+            - dpkg -l | grep "name of package"
+
+apt (high level) Advanced Package Tool
+      - relies on a Repository (storage location eg. a server that has a collection of the software we want to use)
+      - get all the latest packages for your system before running any install
+            - sudo apt update
+      - or to update and upgrade in one command
+            - sudo apt update && sudo apt upgrade
+      - or to upgrade packages and remove ones that aren't required for the upgrade (eg. old versions)
+            - sudo apt update && sudo apt full-upgrade
+      - more thorough and automated install command, to install package it only needs to be named
+            - sudo apt install "package name"
+      - errors from other installs might appear, "apt" offers solutions for repairing
+            - sudo apt --fix-broken install
+      - when repairs are made and install run again, "apt" notifies user which dependency packages are also going to be installed automatically as "apt" finds them for the user - this info can be seen before hitting Y (yes) to install
+      - what Repositories are being used to get all the packages? Do this
+            - sudo apt edit-sources (copy and paste file name location)
+            - cat "file path"
+      - sometimes the tool you want isn't in the repository, most of the time these tools have alternative ways to install the package or they'll have their own repositories that you can add to your sources list and this is done through "sudo apt update" and "sudo apt install"
+      - to see what switches you can use
+            - sudo apt -h
+      - to view list of available packages in your repositories in the Terminal
+            - sudo apt list
+      - to see what's installed on your system
+            - sudo apt --installed
+      - to search through the installed list
+            - sudo apt --installed | grep ^"name of tool"
+      - to learn more about the tool
+            - sudo apt show "tool name"
+      - to search for tools
+            - sudo apt search "tool name"
+
+
+To remove packages, "apt" with sudo privilges can be used
+
+apt
+      - this will remove the application but not the user data, which is handy if you accidentally removed the software or want to install it again
+            - sudo apt remove "name of software"
+      - to get rid of everything
+            - sudo apt purge "name of software"
+      - to check if any software is still on the system
+            - sudo apt list --installed | grep ^"name of software"
+      - repeat command if anything left behind, then check again
+
+
+Other package management in Linux
+
+aptitude (high level)
+      - runs a GUI like interface
+
+snap
+      - more like a store where the package can be accessed in a "snap" to everyone, different from a repository
+      - to install tool
+            - sudo apt install snapd
+      - to install app using "snap" which works similar to "apt"
+            - sudo snap install "name of package"
+
+git
+      - to get the tools from github and install them on your system, go to git and search for tool you want to install, then copy the url
+      - to install (copy) code from github, ensure "git" is installed first, then
+            - git clone "url"
+      - to install the tool it's important to view the requirements in the text file that should come with the download, this can be automated through linux terminal command just be sure the required programming language is installed eg. python, ruby, git
+            - "programming language installer" install -r "name of requirements file".txt
+
+python
+      - uses "pip#" where the hashtag is the release version
+      - files end in ".py"
+            
