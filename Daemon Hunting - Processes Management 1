@@ -1,0 +1,70 @@
+P01M01W03D04
+
+Service & Process Management - follow along video from Linux for Hackers
+
+PROCESSES
+  - defined as an instance of a running program
+  - every time you launch a program, a process is started
+  - to view all running processes
+        - ps -aux
+  - to view a specific running process
+        - ps -aux ~ grep "program name"
+  - when the program is closed, the process is gone
+  - when opening software, this is know as an "interactive process" meaning we had to do something about it, we started the process
+
+
+DAEMONS
+  - they call the shots on your Linux system, the reason that everything works in your system right now, but as background processes a.k.a. "services"  
+  - are processes that we don't start, we have no interaction with them, they're automated
+  - are essential we couldn't use the system without them, they run things like "networking", "printing", "ssh"
+  - how to identify a daemon process, it'll have a "d" at the end of the service name, eg. "sshd"
+  - there's a master daemon process in charge of all the other process daemons - "systemd" - is a service manager and the initialisation system (init), the latter being vital to the boot process and is the first process to start
+        - "boot -> kernel -> systemd (then through "forking" will start the other services eg. starts file mounting system, all services)"
+        - to view the process tree -> pstree
+        - each process has a process ID, "systemd" is always 1
+        - "systemd" calls daemons "units"
+
+
+BECOMING A DAEMON MASTER - MANAGE PROCESSES WITH "SYSTEMCTL"
+  - "systemctl" is how to manage daemons and requires "sudo" priviliges
+        - sudo systemctl "process" "daemon name"
+  - if you want "stop" the ssh daemon 
+        - sudo systemctl stop sshd
+              - WARNING! using this command while using an connected SSH, you'll be logged out
+  - to check the status of a daemon use the following command and view entry in the "Active" field
+        - sudo systemctl status sshd
+  - to bring a daemon back to life
+        - sudo systemctl start "daemon name"
+  - another way to restart daemon that is used a lot
+        - sudo system ctl restart "daemon name"
+  - a command to reload the configuration of a daemon and not the service, not all daemons can do this
+        - sudo systemctl reload "daemon name"
+  - when unsure if a daemon can be loaded, an option to restart instead
+        - sudo systemctl reload-or-restart "daemon name"
+  - to disable a daemon from booting up by itself next time, use status command to verify
+        - sudo systemctl disable "daemon name"
+  - to enable a daemon to start up by itself on the next boot, use status command to verify
+        - sudo systemctl enable "daemon name"
+  - shortcut command options to check the status of a daemon
+        - sudo systemctl is-active "daemon name"
+        - sudo systemctl is-enabled "daemon name"
+  - how to see a list of all the daemons/services running on our Linux system, this also shows a daemons full name (eg. "ntp.service" the latter being the type of service it is)
+        - sudo systemctl list-units
+              - headings shown UNIT, LOAD, ACTIVE, SUB (is it running), DESCRIPTION
+  - to filter the list of services, eg. "-t" stands for "type"
+        - sudo systemctl list-units -t "type name"
+  - to find a specific service
+        - sudo systemctl list-units | grep "daemon name"
+  - you could try this command to find list of active and inactive services
+        - sudo systemctl list-units --all | grep "daemon name"
+  - when using "systemctl list-units" it'll only list units that it has attempted to parsed and load into memory, to list units that aren't parsed or loaded to memory use, status is shown
+        - sudo systemctl list-unit-files | grep "daemon name"
+
+
+DAEMON PROBLEMS - TROUBLESHOOTING
+  - "systemd" offers solutions to view services logs and status
+        - eg. sudo journalctl -xe
+  - "journal" should be full of entries, if it needs restarting, find full name of daemon (eg. "journald.service"), then restart
+        - sudo systemctl list-units | grep journal
+        - sudo systemctl restart systemd-journald
+  - repeat error process and see if journal has more info on problem
