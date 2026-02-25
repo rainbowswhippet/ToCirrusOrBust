@@ -1,0 +1,51 @@
+
+
+Processes Management 2 in Linux (Debian based) - follow along video from Linux For Hackers
+
+REFRESH
+- to see what's running currently in the terminal
+      - ps
+- to see running processes for a user, add "-u" switch
+      - ps -u "username"
+- to filter results for a user, "|" to "grep"
+      - ps -u "username" | grep "term"
+
+
+KILL COMMAND
+- general syntax, kill" command needs a process or job ID, which can be found using "ps" command
+      - kill "signal number" "job number or PID"
+      - kill "ID"
+- there's more than one way to "kill" a process, default is no.15 SIGTERM - this tells the process "please die" and the process might refuse
+- the ultimate KILL signal is 9) SIGKILL
+- shortcut to find process or job ID
+      - pgrep "term"
+- a way to KILL a process without using an ID
+      - pkill "signal number" "process name, eg. ping"
+
+
+MONITORING PROCESSES
+- shows running processes on Linux and sorts them in order of CPU usage
+      - top
+- a fancier version
+      - htop
+
+
+FOREGROUND & BACKGROUND
+- example using "ping" command, "ping" checks if a website is awake and is a foreground process, "-c" stands for count
+      - ping -c "occurence" "url"
+- nothing can be done while process is running - use the following hotkeys to KILL 
+      - ctl+c
+            - this command uses Signal 2) SIGINT (Interupt)
+- to put "ping" to sleep (or stop) - this command uses Kill command 19) SIGSTOP - status can be seen in terminal once command given 
+      - ctl+z
+            - inputing this command again continues the process - uses Signal 18) SIGCONT
+- to see any jobs going, type the below - this command shows the job number, status and command initiated
+      - jobs
+- to move jobs to the background - processes can't be interacted with eg. "ctl+c"
+      - bg
+- to move specific jobs
+      - bg "job number"
+- to move it back to the foreground
+      - fg "job number"
+- make a process go straight to the background
+      - ping -c "occurence" "url" &
