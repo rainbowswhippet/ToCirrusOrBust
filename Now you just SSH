@@ -1,0 +1,27 @@
+P01M01D06&7
+
+(OPEN)SSH
+
+Spent the last couple of days dipping my toe into (Open)SSH. I used the video 'SSH for Beginners: The Ultimate Starter Guide' by Linux TV and Deepseek AI for troubleshooting
+
+Concept
+- Allows remote access from a device to a server through (open)ssh
+- Connecting to a remote server acts like the user has the remote device right in front of them
+- How connections with SSH work in diagram
+      - device -> router/modem -> INTERNET -> router/modem of target -> swtich -> server
+
+Checking & Install
+- ssh client is generally already installed on OSes
+- to check if the ssh service is installed
+      - which ssh
+            - output: /usr/bin/ssh
+- if it's not installed, there would be no input
+- to install
+      - apt search openssh-client
+
+Connecting
+- to connect to a remote server running "ssh"
+      - ssh user@IPaddress
+- as long as the remote server is running the openssh server component and the server allows connections via port 22, you should at least be able to get a password prompt
+- first time connecting will appear like it can't connect, the key fingerprint is displayed and you're asked if you want to continue, then password prompt should come up when entering server login password
+
