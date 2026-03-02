@@ -13,7 +13,7 @@ REFRESH
 
 KILL COMMAND
 - general syntax, kill" command needs a process or job ID, which can be found using "ps" command
-      - kill "signal number" "job number or PID"
+      - kill -"signal number" "job number or PID"
       - kill "ID"
 - there's more than one way to "kill" a process, default is no.15 SIGTERM - this tells the process "please die" and the process might refuse
 - the ultimate KILL signal is 9) SIGKILL
