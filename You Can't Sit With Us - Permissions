@@ -1,4 +1,6 @@
-P01M01D07 - Permissions
+P01M01D07
+
+PERMISSIONS
 
 Understanding (ls) (-l)
   -rw-rw-r-- 1 labex labex 0 Jan 12 01:48 example.txt
