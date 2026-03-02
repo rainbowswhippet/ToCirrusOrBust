@@ -11,7 +11,11 @@ Specific Commands:
 (man command)
 (whoami) and (id)
 (pwd), (echo ~), (ls), (ls ~), (cd), (cd ..), (cd ~), (cd /(directory)/(...)), (touch)
-(echo "Hello Linux" > file2.txt), (echo "Hidden file" > .hiddenfile), (mk dir), (mk dir (directory)), (ls -l), (ls -a), (ls -la), (ls -l (directory)), (ls (directory))
+(echo "Hello Linux" > file2.txt), (echo "Hidden file" > .hiddenfile), 
+  - "mkdir" to make directories
+      - mkdir "directory name"
+      - mkdir -p "nested/directory/names" <- "-p" is used when creating nested directories in a single command  
+(ls -l), (ls -a), (ls -la), (ls -l (directory)), (ls (directory))
 (cp), (cp (file name) ((file name)_copy)), (cp (file name) (directory)/), (cp -r (directory name_copy))
 (mv), (mv (orignal file name) (new file name)), (mv (file name) ((directory moving to)/)), (mv (directory) (new directory name)), (mv (directory/filename) (./(new file name))
 (rm), (rm (filename)), (rm -i (filename)), (rm (directory)), (rm -r (directory)), (rm -f (filename)), (rm -rf (directory)), (rm -rf /), (ls (-R) (directory))
